@@ -8,9 +8,9 @@
   </head>
   <body>
     <form>
-      User:<input type="text" id="User" />
-      <p id="p" style="display: none">Characters left :</p>
-      Phone<input type=" text" id="Phone" /> <input type="radio" /> Terms and
+      User:<input type="text" id="User" required/>
+      <p id="p" style="display: none" required>Characters left :</p>
+      Phone<input type=" text" id="Phone" required/> <input type="radio" /> Terms and
       condition
       <button id="button">Submit</button>
     </form>
@@ -21,8 +21,9 @@
         if (user.value.length > 0) {
           p.style.display = "block"
           p.textContent = "Characters left :" + (10 - user.value.length)
-        }
+        }else{p.style.display = "none"}
       })
+
     </script>
   </body>
 </html>
