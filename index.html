@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script></script>
-    <title>Document</title>
-</head>
-<body>
-    <form>
-        User:<input  type="text" id ="User">
-        <p id ="p" style="display: none;">Characters left :</p>
-        Phone<input  type=" text" id="Phone">
-       <input type="radio"> Terms and condition
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      User:<input type="text" id="User" />
+      <p id="p" style="display: none">Characters left :</p>
+      Phone<input type=" text" id="Phone" /> <input type="radio" /> Terms and
+      condition
+      <button></button>
     </form>
-    
-</body>
+    <script>
+      let p = document.getElementById("p")
+      let user = document.getElementById("User")
+      user.addEventListener("input", function () {
+        if (user.value.length > 0) {
+          p.style.display = "block"
+          p.textContent = "Characters left :" + (10 - user.value.length)
+        }
+      })
+    </script>
+  </body>
 </html>
