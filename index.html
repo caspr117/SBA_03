@@ -3,29 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>body {display: flex;justify-content: center;}form {display: flex;flex-direction: column;line-height: 50px}
+    <style>
+      body {
+        
+        justify-content: center;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        line-height: 50px;
+        text-align: center;
+      }
     </style>
     <title>Document</title>
   </head>
   <body>
     <form>
-      User:<input type="text" id="User" required />
-      <p id="p" style="display: none; color: red;" required>Characters left :</p>
-      Password:<input type="password" id="Password" required />
-      Terms and condition<input type="checkbox"/> 
+      <label for="user">Username:</label>
+      <input type="text" id="user" name="user" required />
+      <p id="p" style="display: none; color: red" required>Characters left :</p>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="Password" />
+      <p id="passworderror" style="display: block; font-size: smaller;" ></p>
+      <label for="checkbox">Terms and conditions</label>
+      <input type="checkbox" name="checkbox" id="checkbox" />
       <button id="button">Submit</button>
     </form>
     <script>
+      let passwordError = document.getElementById('passworderror')
+      let password = document.getElementById("password")
       let form = document.getElementsByTagName("form")
       let p = document.getElementById("p")
-      let user = document.getElementById("User")
+      let user = document.getElementById("user")
       user.maxLength = 10
       user.minLenth = 5
       /// User text length
       user.addEventListener("input", function () {
-        if(user.value.length === 10){
-              p.textContent = "Characters left :" +  0
-        }else if (user.value.length > 0) {
+        if (user.value.length === 10) {
+          p.textContent = "Characters left :" + 0
+        } else if (user.value.length > 0) {
           p.style.display = "block"
           p.textContent = "Characters left :" + (10 - user.value.length)
         } else {
@@ -33,6 +49,16 @@
         }
       })
       ///Password
+      password.addEventListener('input', function(){
+        let regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+        console.log(regex.test(password.value))
+        console.log("hello")
+        if(!regex.test(password.value)){
+            passwordError.textContent = "Password must be minimum eight characters, at least one letter and one number"
+        }else if(regex.test(password.value)){
+            passwordError.textContent = ""
+        }
+      })
     </script>
   </body>
 </html>
