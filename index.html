@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       body {
-        
+        display: flex;
         justify-content: center;
       }
       form {
@@ -24,13 +24,17 @@
       <p id="p" style="display: none; color: red" required>Characters left :</p>
       <label for="password">Password:</label>
       <input type="password" id="password" name="Password" />
-      <p id="passworderror" style="display: block; font-size: smaller;" ></p>
+      <p id="passworderror" style="display: block; font-size: smaller"></p>
       <label for="checkbox">Terms and conditions</label>
       <input type="checkbox" name="checkbox" id="checkbox" />
       <button id="button">Submit</button>
+      <ul id="ul"></ul>
     </form>
+    <!-- JavaScript -->
     <script>
-      let passwordError = document.getElementById('passworderror')
+      let ul = document.getElementById("ul")
+      let checkbox = document.getElementById("checkbox")
+      let passwordError = document.getElementById("passworderror")
       let password = document.getElementById("password")
       let form = document.getElementsByTagName("form")
       let p = document.getElementById("p")
@@ -49,15 +53,37 @@
         }
       })
       ///Password
-      password.addEventListener('input', function(){
-        let regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+      let regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+      password.addEventListener("input", function () {
         console.log(regex.test(password.value))
-        console.log("hello")
-        if(!regex.test(password.value)){
-            passwordError.textContent = "Password must be minimum eight characters, at least one letter and one number"
-        }else if(regex.test(password.value)){
-            passwordError.textContent = ""
+
+        if (!regex.test(password.value)) {
+          passwordError.textContent =
+            "Password must be minimum eight characters, at least one letter and one number"
+        } else if (regex.test(password.value)) {
+          passwordError.textContent = ""
         }
+      })
+      ///Checkbox appned and create element
+      checkbox.addEventListener("change", function () {
+        if (
+          checkbox.checked &&
+          regex.test(password.value) &&
+          user.value.length > 0
+        ) {
+          let z = document.createElement("div")
+          
+           setTimeout(function(){
+            let i = document.createElement("li")
+
+            i.textContent = "Click Submit"
+            i.style.color = "green"
+
+            ul.appendChild(i)
+
+           },"500") 
+          }
+        
       })
     </script>
   </body>
