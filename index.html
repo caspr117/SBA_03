@@ -18,30 +18,32 @@
     <title>Document</title>
   </head>
   <body>
-    <form>
+    <form id = "form">
       <label for="user">Username:</label>
-      <input type="text" id="user" name="user" required />
+      <input type="text" class="forms" id="user" name="user" required />
       <p id="p" style="display: none; color: red" required>Characters left :</p>
       <label for="password">Password:</label>
-      <input type="password" id="password" name="Password" />
-      <p id="passworderror" style="display: block; font-size: smaller"></p>
+      <input type="password" class = "forms" id="password" name="password" />
+      <p id="passworderror"  style="display: block; font-size: smaller"></p>
       <label for="checkbox">Terms and conditions</label>
       <input type="checkbox" name="checkbox" id="checkbox" />
-      <button id="button">Submit</button>
+      <button id="button" value="failed">Submit</button>
       <ul id="ul"></ul>
     </form>
     <!-- JavaScript -->
     <script>
+        let inputs = document.querySelectorAll('.forms')
       let ul = document.getElementById("ul")
       let checkbox = document.getElementById("checkbox")
       let passwordError = document.getElementById("passworderror")
       let password = document.getElementById("password")
-      let form = document.getElementsByTagName("form")
+      let form = document.getElementById("form")
       let p = document.getElementById("p")
       let user = document.getElementById("user")
+      let button = document.getElementById('button')
       user.maxLength = 10
-      user.minLenth = 5
-      /// User text length
+      
+      /// User text length modify html
       user.addEventListener("input", function () {
         if (user.value.length === 10) {
           p.textContent = "Characters left :" + 0
@@ -52,10 +54,10 @@
           p.style.display = "none"
         }
       })
-      ///Password
+      ///Password dom event based Validation
       let regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
       password.addEventListener("input", function () {
-        console.log(regex.test(password.value))
+        
 
         if (!regex.test(password.value)) {
           passwordError.textContent =
@@ -64,27 +66,38 @@
           passwordError.textContent = ""
         }
       })
-      ///Checkbox appned and create element
+      ///Checkbox ,appened and create element and Attribute Validation
+      let i = document.createElement("li")
       checkbox.addEventListener("change", function () {
         if (
           checkbox.checked &&
           regex.test(password.value) &&
           user.value.length > 0
         ) {
-          let z = document.createElement("div")
-          
-           setTimeout(function(){
-            let i = document.createElement("li")
+          setTimeout(function () {
+            
 
             i.textContent = "Click Submit"
             i.style.color = "green"
 
             ul.appendChild(i)
-
-           },"500") 
-          }
-        
+          }, "2000")
+        }
       })
+      /// form Submit ForEach and Reset with event delegation change attribute sibling Relation navigation and deletion
+     form.addEventListener('submit',function (event){
+        event.preventDefault()
+        if( checkbox.checked ){
+            inputs.forEach(input =>{
+                input.value = ""
+            })
+        }checkbox.checked = false
+         i.parentNode.remove()
+         p.style.display = "none"
+         button.value  = "passed"
+
+     })
+
     </script>
   </body>
 </html>
