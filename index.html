@@ -3,36 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<style>
-    body{
-        display: flex;
-        text-align: center;
-    }
-    form{
-        display: flex;
-        flex-direction: column;
-    }
-</style>
+    <style>body {display: flex;justify-content: center;}form {display: flex;flex-direction: column;line-height: 50px}
+    </style>
     <title>Document</title>
   </head>
   <body>
     <form>
-      User:<input type="text" id="User" required/>
-      <p id="p" style="display: none" required>Characters left :</p>
-      Phone<input type=" text" id="Phone" required/> <input type="radio" /> Terms and
-      condition
+      User:<input type="text" id="User" required />
+      <p id="p" style="display: none; color: red;" required>Characters left :</p>
+      Password:<input type="password" id="Password" required />
+      Terms and condition<input type="checkbox"/> 
       <button id="button">Submit</button>
     </form>
     <script>
+      let form = document.getElementsByTagName("form")
       let p = document.getElementById("p")
       let user = document.getElementById("User")
+      user.maxLength = 10
+      user.minLenth = 5
+      /// User text length
       user.addEventListener("input", function () {
-        if (user.value.length > 0) {
+        if(user.value.length === 10){
+              p.textContent = "Characters left :" +  0
+        }else if (user.value.length > 0) {
           p.style.display = "block"
           p.textContent = "Characters left :" + (10 - user.value.length)
-        }else{p.style.display = "none"}
+        } else {
+          p.style.display = "none"
+        }
       })
-
+      ///Password
     </script>
   </body>
 </html>
